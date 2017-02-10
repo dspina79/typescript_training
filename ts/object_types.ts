@@ -20,7 +20,7 @@ module object_types{
 
     console.log(rectangle.calcArea());
 
-    // generate function using options class
+    // generate function using an object with optional values
     var generateArea = function(rect: {h: number, w?: number}){
         if(rect.w === undefined){
             return rect.h * rect.h;

@@ -14,6 +14,7 @@ var object_types;
         }
     };
     console.log(rectangle.calcArea());
+    // generate function using an object with optional values
     var generateArea = function (rect) {
         if (rect.w === undefined) {
             return rect.h * rect.h;
