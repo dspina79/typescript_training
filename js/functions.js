@@ -5,8 +5,8 @@ var myFunc = function (h) {
 // compact notation
 // no "function" keyword shown
 var myFunc2 = function (h) { return console.log("Hello there, " + h); };
-myFunc("Dave");
-myFunc2("Dave");
+myFunc("Dean");
+myFunc2("Dean");
 var squareItSimple = function (h, w) {
     if (w === undefined) {
         return h * h;
@@ -18,7 +18,7 @@ var helloWorld = function (name) {
 };
 console.log(squareItSimple(10, 20));
 console.log(squareItSimple(10));
-helloWorld('Dave');
+helloWorld('Lou');
 helloWorld();
 var superHelloWorld = function (person) {
     console.log("Hello there, " + person.firstName + " " + (person.lastName || ""));
