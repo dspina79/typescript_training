@@ -49,3 +49,11 @@ var engine = new Engine(120, "V8");
 var carWithProps = new NewCar(engine);
 carWithProps.engine.hp = 150;
 carWithProps.start();
+
+// example of casting
+// fails
+//var table: HTMLTableElement = document.createElement('table');
+
+//works
+var table: HTMLTableElement = <HTMLTableElement>document.createElement('table');
+ 
