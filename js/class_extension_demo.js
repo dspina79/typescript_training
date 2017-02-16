@@ -27,7 +27,7 @@ var Animal = (function () {
         this.name = name;
     }
     Animal.prototype.speak = function () {
-        var nameToUse = this.name.nickName === undefined ? this.name.name : this.name.nickName;
+        var nameToUse = this.name.nickName === '' ? this.name.name : this.name.nickName;
         return nameToUse + " says 'mew'";
     };
     return Animal;
@@ -45,13 +45,28 @@ var Cat = (function (_super) {
     };
     return Cat;
 }(Animal));
+var Tiger = (function (_super) {
+    __extends(Tiger, _super);
+    function Tiger() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Tiger.prototype.claw = function () {
+        return this.name.name + " claws you menacingly.";
+    };
+    return Tiger;
+}(Cat));
 var bobName = new NameInfo("Bob");
 bobName.nickName = "Bobby";
 var steveName = new NameInfo("Steve");
 steveName.nickName = "Stevie";
+var leoName = new NameInfo("Leon");
 var bob = new Animal(bobName);
 console.log(bob.speak());
 var steve = new Cat(steveName, 8);
 console.log(steve.speak());
 console.log(steve.actCute());
+var leo = new Tiger(leoName, 16);
+console.log(leo.speak());
+console.log(leo.actCute());
+console.log(leo.claw());
 //# sourceMappingURL=class_extension_demo.js.map
