@@ -4,9 +4,6 @@
         "module": "commonjs",
         "sourceMap": true
         
-    },
-    "files": [
-        "ts/internal_module_demo.ts",
-        "ts/module_demo.ts"
-    ]
+    }
+   
 }

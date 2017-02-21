@@ -1,5 +1,8 @@
-/// <reference path="module_demo.ts" />
-/// <reference path="internal_module_demo.ts" />
+// this example will not work in node.js unless
+// require is used and the module is placed into
+// a file with the same name as the module/namespace
+/// <reference path="./module_demo.ts" />
+/// <reference path="./internal_module_demo.ts" />
 var Shp = Shapes;
 var r1 = new Shp.Rectangle(30, 40);
 var pnt1 = new Shp.Point(6, 8);

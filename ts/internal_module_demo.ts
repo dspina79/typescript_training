@@ -5,7 +5,7 @@ interface IRectangle{
     width: number;
     getArea(): number;
 }
-export namespace Shapes{
+namespace Shapes{
 
     export class Rectangle implements IRectangle{
         constructor(public width: number, public height: number){}
