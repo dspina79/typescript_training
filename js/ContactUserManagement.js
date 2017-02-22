@@ -44,13 +44,22 @@ var ContactUserManagement;
             this.users = [];
         }
         CloudUserCollection.prototype.addUser = function (user) {
-            this.users.push(user);
+            var userFound = false;
+            for (var i = 0; i < this.users.length; i++) {
+                if (this.users[i].id === user.id) {
+                    this.users[i] = user;
+                    userFound = true;
+                }
+            }
+            if (!userFound) {
+                this.users.push(user);
+            }
         };
         CloudUserCollection.prototype.generateList = function () {
             var outList = '';
             for (var i = 0; i < this.users.length; i++) {
                 var u = this.users[i];
-                outList += u.firstName + "  " + u.lastName + "(" + u.id + ")\n";
+                outList += u.firstName + " " + u.lastName + " (" + u.id + ")\n";
             }
             return outList;
         };
@@ -68,9 +77,13 @@ u2.lastName = "Smith";
 var u3 = new ContactUserManagement.CloudUser("220", "dspina");
 u3.firstName = "David";
 u3.lastName = "Spina";
+var u2Copy = new ContactUserManagement.CloudUser("150", "jsmith-tensor");
+u2Copy.firstName = "Jane";
+u2Copy.lastName = "Smith-Tensor";
 var users = new ContactUserManagement.CloudUserCollection();
 users.addUser(u1);
 users.addUser(u2);
 users.addUser(u3);
+users.addUser(u2Copy);
 console.log(users.generateList());
 //# sourceMappingURL=ContactUserManagement.js.map
