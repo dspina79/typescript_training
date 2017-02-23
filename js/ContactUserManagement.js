@@ -1,10 +1,19 @@
 var ContactUserManagement;
 (function (ContactUserManagement) {
+    var UserAttribute = (function () {
+        function UserAttribute(key, value) {
+            this.key = key;
+            this.value = value;
+        }
+        return UserAttribute;
+    }());
+    ContactUserManagement.UserAttribute = UserAttribute;
     var CloudUser = (function () {
         function CloudUser(id, username) {
             this.id = id;
             this.username = username;
             this._password = '';
+            this.attributes = [];
         }
         Object.defineProperty(CloudUser.prototype, "firstName", {
             get: function () {
@@ -35,6 +44,10 @@ var ContactUserManagement;
         };
         CloudUser.prototype.login = function (username, password) {
             return this._password !== '' && this.username === username && this._password === password;
+        };
+        CloudUser.prototype.addAttribute = function (key, value) {
+            var a = new UserAttribute(key, value);
+            this.attributes.push(a);
         };
         return CloudUser;
     }());

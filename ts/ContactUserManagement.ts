@@ -4,6 +4,18 @@ namespace ContactUserManagement{
         id: string;
         username: string;
         login(username: string, password: string) : boolean;
+        attributes: ICustomAttribute[];
+    }
+
+    export interface ICustomAttribute{
+        key: string;
+        value: any;
+    }
+
+    export class UserAttribute implements ICustomAttribute{
+        constructor(public key: string, public value: any){
+
+        }
     }
 
     export class CloudUser implements IUser{
@@ -11,6 +23,7 @@ namespace ContactUserManagement{
 
         private _firstName: string;
         private _lastName: string;
+        public attributes: UserAttribute[];
 
         get firstName(){
             return this._firstName;
@@ -37,11 +50,17 @@ namespace ContactUserManagement{
         }
 
         constructor(public id: string, public username: string){
-           this._password = '';     
+           this._password = '';
+           this.attributes = [];     
         }
 
         login(username: string, password: string){
             return this._password !== '' && this.username === username && this._password === password;
+        }
+
+        addAttribute(key: string, value: any){
+            var a: UserAttribute = new UserAttribute(key, value);
+            this.attributes.push(a);
         }
     }
 
