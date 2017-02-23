@@ -66,14 +66,25 @@ namespace ContactUserManagement{
             }
         }
 
+        removeUser(userToRemove: CloudUser){
+            var newUsers: CloudUser[] = [];
+
+            this.users.forEach(function(user){
+                if(user.id !== userToRemove.id){
+                    newUsers.push(user);
+                }
+            });
+
+            this.users = newUsers;
+        }
+
 
         generateList(){
             var outList = '';
 
-            for(var i = 0; i < this.users.length; i++){
-                var u : CloudUser = this.users[i];
-                outList += u.firstName +  " " + u.lastName + " (" + u.id + ")\n";
-            }
+            this.users.forEach(function(user){
+                outList += user.firstName +  " " + user.lastName + " (" + user.id + ")\n"; 
+            });
 
             return outList;
         }
@@ -92,6 +103,11 @@ var u3 = new ContactUserManagement.CloudUser("220", "dspina");
 u3.firstName = "David";
 u3.lastName = "Spina";
 
+
+var u4 = new ContactUserManagement.CloudUser("999", "remove");
+u4.firstName = "Linda";
+u4.lastName = "Remove";
+
 var u2Copy = new ContactUserManagement.CloudUser("150", "jsmith-tensor");
 u2Copy.firstName = "Jane";
 u2Copy.lastName = "Smith-Tensor";
@@ -102,5 +118,10 @@ users.addUser(u1);
 users.addUser(u2);
 users.addUser(u3);
 users.addUser(u2Copy);
+users.addUser(u4);
 
+console.log("Before Removal:\n");
+console.log(users.generateList());
+console.log("\nAfter Removal:\n");
+users.removeUser(u4);
 console.log(users.generateList());
