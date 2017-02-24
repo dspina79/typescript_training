@@ -62,6 +62,12 @@ namespace ContactUserManagement{
             var a: UserAttribute = new UserAttribute(key, value);
             this.attributes.push(a);
         }
+
+        addAttributes(attributesToAdd: ICustomAttribute[]){
+           for(var i = 0; i < attributesToAdd.length; i++){
+               this.attributes.push(<UserAttribute>attributesToAdd[i]);
+           }
+        }
     }
 
     export class CloudUserCollection{
@@ -98,12 +104,21 @@ namespace ContactUserManagement{
         }
 
 
-        generateList(){
+        generateList(showAttributes: boolean = false){
             var outList = '';
 
             this.users.forEach(function(user){
-                outList += user.firstName +  " " + user.lastName + " (" + user.id + ")\n"; 
+                outList += user.firstName +  " " + user.lastName + " (" + user.id + ")\n";
+                    
+                if(showAttributes){
+                    user.attributes.forEach(function(attr){
+                        outList += "\t" + attr.key + ": " + attr.value + "\n";
+                    })
+                } 
             });
+
+
+
 
             return outList;
         }
@@ -119,9 +134,9 @@ var u2 = new ContactUserManagement.CloudUser("150", "jsmith");
 u2.firstName = "Jane";
 u2.lastName = "Smith";
 var u3 = new ContactUserManagement.CloudUser("220", "dspina");
-u3.firstName = "David";
-u3.lastName = "Spina";
-
+u3.firstName = "Dave";
+u3.lastName = "Alderman";
+u3.addAttribute("age", 25);
 
 var u4 = new ContactUserManagement.CloudUser("999", "remove");
 u4.firstName = "Linda";
@@ -130,6 +145,9 @@ u4.lastName = "Remove";
 var u2Copy = new ContactUserManagement.CloudUser("150", "jsmith-tensor");
 u2Copy.firstName = "Jane";
 u2Copy.lastName = "Smith-Tensor";
+u2Copy.addAttribute("age", 45);
+u2Copy.addAttribute("height", 65);
+u2Copy.addAttribute("favorite color", "red");
 
 
 var users = new ContactUserManagement.CloudUserCollection();
@@ -140,7 +158,7 @@ users.addUser(u2Copy);
 users.addUser(u4);
 
 console.log("Before Removal:\n");
-console.log(users.generateList());
+console.log(users.generateList(true));
 console.log("\nAfter Removal:\n");
 users.removeUser(u4);
-console.log(users.generateList());
+console.log(users.generateList(true));
